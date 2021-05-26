@@ -17,7 +17,7 @@ public class FinancingTests {
 
 		Double entry = fin.entry();
 
-		Assertions.assertEquals(entry, expectedValue);
+		Assertions.assertEquals(expectedValue,entry);
 	}
 
 	@Test
@@ -31,7 +31,7 @@ public class FinancingTests {
 
 		Double quota = fin.quota();
 
-		Assertions.assertEquals(quota, expectedValue);
+		Assertions.assertEquals(expectedValue,quota);
 
 	}
 

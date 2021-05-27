@@ -1,13 +1,16 @@
 package tests.entities;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import entities.Financing;
 import testes.factory.FinancingFactory;
 
 public class FinancingTests {
-
+	
+	
 	@Test
 	public void entryShouldBeTwentyPercentOfTotalAmount() {
 
@@ -17,7 +20,7 @@ public class FinancingTests {
 
 		Double entry = fin.entry();
 
-		Assertions.assertEquals(expectedValue,entry);
+		assertEquals(expectedValue,entry);
 	}
 
 	@Test
@@ -31,14 +34,14 @@ public class FinancingTests {
 
 		Double quota = fin.quota();
 
-		Assertions.assertEquals(expectedValue,quota);
+		assertEquals(expectedValue,quota);
 
 	}
 
 	@Test
 	public void constructorShouldThrowExceptionWhenQuoteBiggerThenIncome() {
 
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 
 			Financing fin = FinancingFactory.createFinancing(20000.0, 500.0, 14);
 		});
@@ -54,16 +57,16 @@ public class FinancingTests {
 
 		Financing fin = FinancingFactory.createFinancing(expectedTotalAmount, expectedIncome, expectedMonths);
 
-		Assertions.assertEquals(expectedTotalAmount, fin.getTotalAmount());
-		Assertions.assertEquals(expectedIncome, fin.getIncome());
-		Assertions.assertEquals(expectedMonths, fin.getMonths());
+		assertEquals(expectedTotalAmount, fin.getTotalAmount());
+		assertEquals(expectedIncome, fin.getIncome());
+		assertEquals(expectedMonths, fin.getMonths());
 
 	}
 	
 	@Test
 	public void setTotalAmountShouldThrowExceptionWhenQuoteBiggerThenIncome() {
 		
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 
 			Financing fin = FinancingFactory.createFinancing(20000.0, 5000.0, 10);
 			fin.setTotalAmount(50000.0);
@@ -76,14 +79,14 @@ public class FinancingTests {
 		Financing fin = FinancingFactory.createFinancing(10000.0,7000.0,12);
 		fin.setTotalAmount(40000.0);
 		
-		Assertions.assertEquals(40000.0, fin.getTotalAmount());
+		assertEquals(40000.0, fin.getTotalAmount());
 			
 	}
 	
 	@Test
 	public void setIncomeShouldThrowExceptionWhenQuoteBiggerThenIncome() {
 		
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 
 			Financing fin = FinancingFactory.createFinancing(20000.0, 5000.0, 10);
 			fin.setIncome(1000.0);
@@ -96,14 +99,14 @@ public class FinancingTests {
 		Financing fin = FinancingFactory.createFinancing(5000.0,1000.0,10);
 		fin.setIncome(2000.0);
 		
-		Assertions.assertEquals(2000.0, fin.getIncome());
+		assertEquals(2000.0, fin.getIncome());
 			
 	}
 
 	@Test
 	public void setMonthsShouldThrowExceptionWhenQuoteBiggerThenIncome() {
 		
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(IllegalArgumentException.class, () -> {
 
 			Financing fin = FinancingFactory.createFinancing(20000.0, 5000.0, 10);
 			fin.setMonths(5);
@@ -116,7 +119,7 @@ public class FinancingTests {
 		Financing fin = FinancingFactory.createFinancing(5000.0,1000.0,10);
 		fin.setMonths(15);
 		
-		Assertions.assertEquals(15, fin.getMonths());
+		assertEquals(15, fin.getMonths());
 			
 	}
 

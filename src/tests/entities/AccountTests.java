@@ -1,23 +1,26 @@
 package tests.entities;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import entities.Account;
 import testes.factory.AccountFactory;
 
 public class AccountTests {
-	
+
 	@Test
 	public void depositShouldIncreaseBalanceAndDiscountFeeWhenPositiveAmount() {
-		
+
 		double amount = 200.0;
 		double expectedValue = 196.0;
 		Account acc = AccountFactory.createEmptyAccount();
-		
+
 		acc.deposit(amount);
-		
-		Assertions.assertEquals(expectedValue, acc.getBalance());
+
+		assertEquals(expectedValue, acc.getBalance());
 	}
 
 	@Test
@@ -29,41 +32,41 @@ public class AccountTests {
 
 		acc.deposit(amount);
 
-		Assertions.assertEquals(expectedValue, acc.getBalance());
+		assertEquals(expectedValue, acc.getBalance());
 
 	}
-	
+
 	@Test
 	public void fullWithdrawShouldClearBalanceAndReturnFullBalance() {
 
 		double expectedValue = 0;
 		double initialBalance = 800.0;
 		Account acc = AccountFactory.createAccount(initialBalance);
-		
+
 		double result = acc.fullWithdraw();
 
-		Assertions.assertTrue(expectedValue == acc.getBalance());
-		Assertions.assertTrue(result == initialBalance);
+		assertTrue(expectedValue == acc.getBalance());
+		assertTrue(result == initialBalance);
 	}
-	
+
 	@Test
 	public void withdrawShouldDecreaseBalanceWhenSufficientBalance() {
-	
+
 		Account acc = AccountFactory.createAccount(800.00);
-		
+
 		acc.withdraw(500.0);
-		
-		Assertions.assertEquals(300.0, acc.getBalance());
+
+		assertEquals(300.0, acc.getBalance());
 	}
-	
+
 	@Test
 	public void withdrawShouldThrowExceptionWhenSufficientBalance() {
-			
-		Assertions.assertThrows(IllegalArgumentException.class, ()->{
+
+		assertThrows(IllegalArgumentException.class, () -> {
 
 			Account acc = AccountFactory.createAccount(800.00);
-			
-			acc.withdraw(801.0);		
+
+			acc.withdraw(801.0);
 		});
 	}
 }
